@@ -1,25 +1,21 @@
-def shifter(arr, shift)
-  arr.map { |number| 
-  if number >= 65 && number <= 90
-    number += shift
-    if number > 90
-      number -= 26
+# frozen_string_literal: true
+
+def shift(arr, shf)
+  arr.map do |number|
+    if number >= 65 && number <= 90
+      number += shf
+      number -= 26 if number > 90
+    elsif number >= 97 && number <= 122
+      number += shf
+      number -= 26 if number > 122
     end
-  elsif number >= 97 && number <= 122
-    number += shift
-      if number > 122
-        number -= 26
-      end
+    number
   end
-number }
 end
 
 def caesar_cipher(string, shift)
-  arr = string.split("").map {|letter| letter.ord}
+  arr = string.split('').map(&:ord)
 
-  arr = shifter(arr, shift).map{|letter| letter.chr}.join
+  shift(arr, shift).map(&:chr).join
 end
-p caesar_cipher("What a string!", 5)
-
-
-
+p caesar_cipher('What a string!', 5)
